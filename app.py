@@ -61,7 +61,7 @@ def update_todo(id):
 @app.route("/covidd",methods=['POST'])
 def create_entry():
     data=request.json
-    frontData_collection.insert_one({"_id":str(uuid.uuid4)(), "pais":data["pais"], "estado":data["estado"]})
+    frontData_collection.insert_one({"_id":str(uuid.uuid4()),"pais":data["pais"],"estado":data["estado"]})
     return "Entry created"
 
 @app.route("/covidd/list",methods=['GET'])

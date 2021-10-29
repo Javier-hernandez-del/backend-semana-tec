@@ -11,7 +11,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-CONNECTION_STRING = "mongodb+srv://andres:pruebatec@cluster0.zllxo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+CONNECTION_STRING = "mongodb+srv://javier:prueba123@cluster0.xevds.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 client = pymongo.MongoClient(CONNECTION_STRING,ssl_cert_reqs=ssl.CERT_NONE)
 db = client.get_database('flask_mongodb_atlas')
 user_collection = pymongo.collection.Collection(db, 'user_collection')

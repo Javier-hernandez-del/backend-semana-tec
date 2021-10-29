@@ -16,6 +16,7 @@ client = pymongo.MongoClient(CONNECTION_STRING,ssl_cert_reqs=ssl.CERT_NONE)
 db = client.get_database('flask_mongodb_atlas')
 user_collection = pymongo.collection.Collection(db, 'user_collection')
 todo_collection = pymongo.collection.Collection(db, 'todo_collection')
+frontData_collection = pymongo.collection.Collection(db, 'frontData_collection')
 
 
 @app.route("/")
@@ -56,3 +57,16 @@ def list_todo():
 def update_todo(id):
     todo=todo_collection.update_one({"_id":id},{"$set":{"done":True}})
     return f"Task {id} completed"
+
+@app.route("/covidd",methods=['POST'])
+def create_entry():
+    data=request.json
+    frontData_collection.insert_one({"_id":str(uuid.uuid4)(), "pais":data["pais"], "estado":data["estado"]})
+    return ""
+
+@app.route("/covidd/list",methods=['GET'])
+def list_entries():
+    entries = frontData_collection.find()
+    response=[entry for entry in entries]
+    return json.dumps(response, default=json_util.default)
+    
